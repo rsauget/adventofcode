@@ -80,6 +80,4 @@
           line)))
       trees))))
 
-(defn day8
-  []
-  (day 8 part1 part2))
+(def day8 #(day 8 part1 part2))

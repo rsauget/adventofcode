@@ -64,6 +64,4 @@
      (str/split input #"\n"))
     :visited)))
 
-(defn day9
-  []
-  (day 9 part1 part2))
+(def day9 #(day 9 part1 part2))

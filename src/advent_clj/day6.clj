@@ -25,6 +25,4 @@
   [input]
   (find-marker 14 input))
 
-(defn day6
-  []
-  (day 6 part1 part2))
+(def day6 #(day 6 part1 part2))

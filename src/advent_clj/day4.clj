@@ -48,6 +48,4 @@
     (str/split input #"\n"))))
 
 
-(defn day4
-  []
-  (day 4 part1 part2))
+(def day4 #(day 4 part1 part2))

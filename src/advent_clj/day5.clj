@@ -96,6 +96,4 @@
        moves)))))
 
 
-(defn day5
-  []
-  (day 5 part1 part2))
+(def day5 #(day 5 part1 part2))

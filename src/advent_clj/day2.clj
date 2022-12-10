@@ -59,6 +59,4 @@
     get-turn-score-part2
     (str/split input #"\n"))))
 
-(defn day2
-  []
-  (day 2 part1 part2))
+(def day2 #(day 2 part1 part2))

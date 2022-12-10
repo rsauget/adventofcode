@@ -6,13 +6,13 @@
   (let
    [day (format "day%d" day-number)
     input (slurp (.getFile (io/resource (format "%s/input.txt" day))))]
-    (println (format "------ %s ------" day))
+    (println (format "****** Day %02d ******" day-number))
     (doseq
      [[number, part] (map-indexed
                       (fn [index, part] [(inc index), part])
                       parts)]
       (println
-       (format "part%d:" number)
+       (format "* Part %d:" number)
        (part input)))
-    (println "------------------")
+    (println "********************")
     (println)))

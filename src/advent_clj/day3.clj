@@ -51,6 +51,4 @@
       get-group-priority
       groups))))
 
-(defn day3
-  []
-  (day 3 part1 part2))
+(def day3 #(day 3 part1 part2))

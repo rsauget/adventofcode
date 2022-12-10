@@ -77,6 +77,4 @@
         second
         folders))))))
 
-(defn day7
-  []
-  (day 7 part1 part2))
+(def day7 #(day 7 part1 part2))

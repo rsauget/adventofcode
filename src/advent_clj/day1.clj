@@ -30,7 +30,5 @@
      >
      (get-elves-calories input)))))
 
-(defn day1
-  []
-  (day 1 part1 part2))
+(def day1 #(day 1 part1 part2))
 
