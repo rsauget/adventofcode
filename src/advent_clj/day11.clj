@@ -1,6 +1,5 @@
 (ns advent-clj.day11
-  (:require [advent-clj.utils :refer [day]]
-            [clojure.string :as str]))
+  (:require [clojure.string :as str]))
 
 (defn- parse-test
   [test if-true if-false]
@@ -114,4 +113,4 @@
     (monkey-business
      (run-rounds 10000 monkeys #(mod % modulo)))))
 
-(def day11 #(day 11 part1 part2))
+(def day11 [part1 part2])

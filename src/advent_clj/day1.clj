@@ -1,17 +1,18 @@
 (ns advent-clj.day1
-  (:require [advent-clj.utils :refer [day]]
-            [clojure.string :as str]))
+  (:require [clojure.string :as str]))
+
+(defn- get-elf-calories
+  [elf]
+  (let
+   [calories (map
+              read-string
+              (str/split elf #"\n"))]
+    (reduce + calories)))
 
 (defn- get-elves-calories [input]
   (let [elves (str/split input #"\n\n")]
     (map
-     (fn
-       [elf]
-       (let
-        [calories (map
-                   read-string
-                   (str/split elf #"\n"))]
-         (reduce + calories)))
+     get-elf-calories
      elves)))
 
 (defn- part1
@@ -30,5 +31,4 @@
      >
      (get-elves-calories input)))))
 
-(def day1 #(day 1 part1 part2))
-
+(def day1 [part1 part2])

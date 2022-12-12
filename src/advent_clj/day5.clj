@@ -1,6 +1,5 @@
 (ns advent-clj.day5
-  (:require [advent-clj.utils :refer [day]]
-            [clojure.string :as str]))
+  (:require [clojure.string :as str]))
 
 (def ^:private stack-numbers-matcher
   #"^[ 0-9]+$")
@@ -95,5 +94,4 @@
        stacks
        moves)))))
 
-
-(def day5 #(day 5 part1 part2))
+(def day5 [part1 part2])

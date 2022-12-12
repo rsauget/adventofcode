@@ -1,27 +1,42 @@
 (ns advent-clj.core
   (:gen-class)
-  (:require [advent-clj.day1 :as day1]
-            [advent-clj.day2 :as day2]
-            [advent-clj.day3 :as day3]
-            [advent-clj.day4 :as day4]
-            [advent-clj.day5 :as day5]
-            [advent-clj.day6 :as day6]
-            [advent-clj.day7 :as day7]
-            [advent-clj.day8 :as day8]
-            [advent-clj.day9 :as day9]
-            [advent-clj.day10 :as day10]
-            [advent-clj.day11 :as day11]))
+  (:require [advent-clj.day1 :refer [day1]]
+            [advent-clj.day10 :refer [day10]]
+            [advent-clj.day11 :refer [day11]]
+            [advent-clj.day2 :refer [day2]]
+            [advent-clj.day3 :refer [day3]]
+            [advent-clj.day4 :refer [day4]]
+            [advent-clj.day5 :refer [day5]]
+            [advent-clj.day6 :refer [day6]]
+            [advent-clj.day7 :refer [day7]]
+            [advent-clj.day8 :refer [day8]]
+            [advent-clj.day9 :refer [day9]]
+            [advent-clj.utils :refer [run-day]]))
+
+(def days
+  [day1
+   day2
+   day3
+   day4
+   day5
+   day6
+   day7
+   day8
+   day9
+   day10
+   day11])
 
 (defn -main
   []
-  (day1/day1)
-  (day2/day2)
-  (day3/day3)
-  (day4/day4)
-  (day5/day5)
-  (day6/day6)
-  (day7/day7)
-  (day8/day8)
-  (day9/day9)
-  (day10/day10)
-  (day11/day11))
+  (doall
+   (map-indexed
+    (fn [index [& parts]]
+      (let [day-number (inc index)]
+        (println (format "****** Day %02d ******" day-number))
+        (doseq
+         [[number, result] (run-day day-number parts)]
+          (println (format "* Part %d:" number))
+          (println result)))
+      (println "********************")
+      (println))
+    days)))

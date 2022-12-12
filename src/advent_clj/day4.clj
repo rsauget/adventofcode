@@ -1,6 +1,5 @@
 (ns advent-clj.day4
-  (:require [advent-clj.utils :refer [day]]
-            [clojure.string :as str]))
+  (:require [clojure.string :as str]))
 
 (defn- parse-range [range]
   (map read-string (str/split range #"-")))
@@ -47,5 +46,4 @@
         (ranges-overlap left right)))
     (str/split input #"\n"))))
 
-
-(def day4 #(day 4 part1 part2))
+(def day4 [part1 part2])

@@ -1,6 +1,5 @@
 (ns advent-clj.day7
-  (:require [advent-clj.utils :refer [day]]
-            [clojure.string :as str]))
+  (:require [clojure.string :as str]))
 
 (defn- add-file-size
   [folders cwd file-size]
@@ -77,4 +76,4 @@
         second
         folders))))))
 
-(def day7 #(day 7 part1 part2))
+(def day7 [part1 part2])

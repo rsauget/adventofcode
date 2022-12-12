@@ -1,6 +1,5 @@
 (ns advent-clj.day10
-  (:require [advent-clj.utils :refer [day]]
-            [clojure.string :as str]))
+  (:require [clojure.string :as str]))
 
 (defn- run-cycles [cycle-count cycle-function instructions]
   (:results
@@ -57,4 +56,4 @@
              dark-pixel))
          (str/split input #"\n"))))))))
 
-(def day10 #(day 10 part1 part2))
+(def day10 [part1 part2])

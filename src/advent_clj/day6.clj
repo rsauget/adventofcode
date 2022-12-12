@@ -1,5 +1,4 @@
-(ns advent-clj.day6
-  (:require [advent-clj.utils :refer [day]]))
+(ns advent-clj.day6)
 
 (defn- find-marker [marker-length input]
   (first
@@ -25,4 +24,4 @@
   [input]
   (find-marker 14 input))
 
-(def day6 #(day 6 part1 part2))
+(def day6 [part1 part2])

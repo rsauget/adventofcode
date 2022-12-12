@@ -1,6 +1,5 @@
 (ns advent-clj.day9
-  (:require [advent-clj.utils :refer [day]]
-            [clojure.string :as str]))
+  (:require [clojure.string :as str]))
 
 (defn- update-head
   [[x y] direction]
@@ -64,4 +63,4 @@
      (str/split input #"\n"))
     :visited)))
 
-(def day9 #(day 9 part1 part2))
+(def day9 [part1 part2])

@@ -1,6 +1,5 @@
 (ns advent-clj.day2
-  (:require [advent-clj.utils :refer [day]]
-            [clojure.string :as str]))
+  (:require [clojure.string :as str]))
 
 (def shape-scores
   {"X" 1
@@ -59,4 +58,4 @@
     get-turn-score-part2
     (str/split input #"\n"))))
 
-(def day2 #(day 2 part1 part2))
+(def day2 [part1 part2])

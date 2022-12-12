@@ -1,6 +1,5 @@
 (ns advent-clj.day8
-  (:require [advent-clj.utils :refer [day]]
-            [clojure.string :as str]))
+  (:require [clojure.string :as str]))
 
 (defn- is-visible
   [trees x y]
@@ -80,4 +79,4 @@
           line)))
       trees))))
 
-(def day8 #(day 8 part1 part2))
+(def day8 [part1 part2])

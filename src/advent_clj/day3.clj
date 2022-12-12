@@ -1,6 +1,5 @@
 (ns advent-clj.day3
-  (:require [advent-clj.utils :refer [day]]
-            [clojure.set :as set]
+  (:require [clojure.set :as set]
             [clojure.string :as str]))
 
 (defn- get-item-priority
@@ -51,4 +50,4 @@
       get-group-priority
       groups))))
 
-(def day3 #(day 3 part1 part2))
+(def day3 [part1 part2])
