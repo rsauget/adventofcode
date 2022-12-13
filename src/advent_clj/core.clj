@@ -38,7 +38,7 @@
       (let [day-number (inc index)]
         (println (format "****** Day %02d ******" day-number))
         (doseq
-         [[number, result] (run-day day-number parts)]
+         [[number result] (run-day day-number parts)]
           (println (format "* Part %d:" number))
           (println result)))
       (println "********************")

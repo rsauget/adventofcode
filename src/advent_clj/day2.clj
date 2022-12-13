@@ -23,7 +23,7 @@
 
 (defn- get-turn-score-part1 [turn]
   (let
-   [[elf-move, my-move] (str/split turn #" ")]
+   [[elf-move my-move] (str/split turn #" ")]
     (+
      (get shape-scores my-move)
      (cond
@@ -33,11 +33,11 @@
 
 (defn- get-turn-score-part2 [turn]
   (let
-   [[elf-move, outcome] (str/split turn #" ")
-    [my-move, move-score] (cond
-                            (= outcome "X") [(get losing-moves elf-move), 0]
-                            (= outcome "Y") [(get draw-moves elf-move), 3]
-                            (= outcome "Z") [(get winning-moves elf-move), 6])]
+   [[elf-move outcome] (str/split turn #" ")
+    [my-move move-score] (cond
+                            (= outcome "X") [(get losing-moves elf-move) 0]
+                            (= outcome "Y") [(get draw-moves elf-move) 3]
+                            (= outcome "Z") [(get winning-moves elf-move) 6])]
     (+
      (get shape-scores my-move)
      move-score)))

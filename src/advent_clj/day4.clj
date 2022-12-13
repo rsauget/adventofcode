@@ -7,8 +7,8 @@
 (defn- range-contains
   [left right]
   (let
-   [[left-min, left-max] (parse-range left)
-    [right-min, right-max] (parse-range right)]
+   [[left-min left-max] (parse-range left)
+    [right-min right-max] (parse-range right)]
     (and
      (<= left-min right-min)
      (>= left-max right-max))))
@@ -16,8 +16,8 @@
 (defn- ranges-overlap
   [left right]
   (let
-   [[left-min, left-max] (parse-range left)
-    [right-min, right-max] (parse-range right)]
+   [[left-min left-max] (parse-range left)
+    [right-min right-max] (parse-range right)]
     (and
      (<= left-min right-max)
      (>= left-max right-min))))
@@ -29,7 +29,7 @@
     (fn
       [line]
       (let
-       [[left, right] (str/split line #",")]
+       [[left right] (str/split line #"")]
         (or
          (range-contains left right)
          (range-contains right left))))
@@ -42,7 +42,7 @@
     (fn
       [line]
       (let
-       [[left, right] (str/split line #",")]
+       [[left right] (str/split line #"")]
         (ranges-overlap left right)))
     (str/split input #"\n"))))
 

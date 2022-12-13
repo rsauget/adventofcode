@@ -11,6 +11,6 @@
    [input (slurp-input day-number)]
     (map-indexed
      (fn
-       [index, part]
-       [(inc index), (part input)])
+       [index part]
+       [(inc index) (part input)])
      parts)))
