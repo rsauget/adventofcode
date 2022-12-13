@@ -23,12 +23,12 @@
 
 (defn- get-turn-score-part1 [turn]
   (let
-   [[elf-move my-move] (str/split turn #" ")]
+   [[_elf-move my-move :as moves] (str/split turn #" ")]
     (+
      (get shape-scores my-move)
      (cond
-       (= (get winning-moves elf-move) my-move) 6
-       (= (get draw-moves elf-move) my-move) 3
+       ((set winning-moves) moves) 6
+       ((set draw-moves) moves) 3
        :else 0))))
 
 (defn- get-turn-score-part2 [turn]

@@ -5,12 +5,9 @@
    (keep-indexed
     (fn
       [index value]
-      (if
-       (=
-        (count (set value))
-        marker-length)
-        (+ index marker-length)
-        nil))
+      (when
+       (= marker-length (count (set value)))
+        (+ index marker-length)))
     (partition
      marker-length
      1

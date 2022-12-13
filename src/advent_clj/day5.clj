@@ -10,88 +10,62 @@
 (def ^:private move-matcher
   #"^move (\d+) from (\d+) to (\d+)$")
 
-(defn- extend-vector
-  [vector length default-value]
-  (let [vector-length (count vector)]
-    (if (<= length vector-length)
-      vector
-      (vec
-       (concat
-        vector
-        (repeat (- length vector-length) default-value))))))
-
 (defn- parse-stacks-line
   [stacks line]
-  (reduce
-   (fn
-     [stacks [index item]]
-     (let [stacks (extend-vector stacks (inc index) [])
-           stack (get stacks index [])]
-       (if
-        (nil? item) stacks
-        (assoc stacks index (conj stack item)))))
+  (merge-with
+   (fn [stack item] (concat [] stack item))
    stacks
-
-   (map-indexed
-    (fn [index matches] [index (get matches 1)])
-    (re-seq stack-item-matcher line))))
+   (into {} (keep-indexed
+             (fn [index matches]
+               (when (second matches) [(inc index)
+                                       (second matches)]))
+             (re-seq stack-item-matcher line)))))
 
 (defn- parse-input
-  ([lines] (parse-input lines []))
-  ([lines stacks]
-   (let
-    [line (first lines)
-     remaining (rest lines)]
-     (if
-      (re-matches stack-numbers-matcher line)
-       [stacks (rest remaining)]
-       (recur
-        remaining
-        (parse-stacks-line
-         stacks
-         line))))))
+  ([lines] (parse-input lines (sorted-map)))
+  ([[line & remaining] stacks]
+   (if
+    (re-matches stack-numbers-matcher line)
+     [stacks (rest remaining)]
+     (recur
+      remaining
+      (parse-stacks-line stacks line)))))
 
 (defn- apply-move
   [reverse-items stacks move]
   (let [[count from to] (map read-string (rest (re-matches move-matcher move)))
-        from-index (dec from)
-        to-index (dec to)
-        from-stack (get stacks from-index)]
-    (vec
-     (map-indexed
-      (fn [index stack]
-        (cond
-          (= index from-index) (drop count stack)
-          (= index to-index) (concat
-                              ((if reverse-items reverse identity) (take count from-stack))
-                              stack)
-          :else stack))
-      stacks))))
+        from-stack (get stacks from)
+        to-stack (get stacks to)]
+    (assoc stacks
+           from (drop count from-stack)
+           to (concat
+               ((if reverse-items reverse identity) (take count from-stack))
+               to-stack))))
 
 (defn- part1
   [input]
-  (let [[stacks moves] (parse-input
-                        (str/split input #"\n"))]
+  (let [[stacks moves] (parse-input (str/split input #"\n"))]
     (str/join
      ""
      (map
       first
-      (reduce
-       (partial apply-move true)
-       stacks
-       moves)))))
+      (vals
+       (reduce
+        (partial apply-move true)
+        stacks
+        moves))))))
 
 (defn- part2
   [input]
-  (let [[stacks moves] (parse-input
-                        (str/split input #"\n"))]
+  (let [[stacks moves] (parse-input (str/split input #"\n"))]
     (str/join
      ""
      (map
       first
-      (reduce
-       (partial apply-move false)
-       stacks
-       moves)))))
+      (vals
+       (reduce
+        (partial apply-move false)
+        stacks
+        moves))))))
 
 (def day5 [part1 part2])

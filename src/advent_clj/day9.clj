@@ -15,12 +15,17 @@
         distance-y (abs (- y head-y))]
     (cond
       (and (<= distance-x 1) (<= distance-y 1)) [x y]
-      (= distance-x 0) (if (> y head-y) [x (dec y)] [x (inc y)])
-      (= distance-y 0) (if (> x head-x) [(dec x) y] [(inc x) y])
-      :else [(if (> x head-x) (dec x) (inc x)) (if (> y head-y) (dec y) (inc y))])))
+      (= distance-x 0) (if (> y head-y)
+                         [x (dec y)]
+                         [x (inc y)])
+      (= distance-y 0) (if (> x head-x)
+                         [(dec x) y]
+                         [(inc x) y])
+      :else [(if (> x head-x) (dec x) (inc x))
+             (if (> y head-y) (dec y) (inc y))])))
 
 (defn- apply-move-step
-  [{:keys [knots visited]} direction]
+  [direction {:keys [knots visited]}]
   (let [head (first knots)
         others (rest knots)
         new-knots (reduce
@@ -36,31 +41,28 @@
 (defn- apply-move
   [state move]
   (let [[direction distance] (str/split move #" ")]
-    (reduce
-     apply-move-step
-     state
-     (repeat (read-string distance) direction))))
+    (nth
+     (iterate (partial apply-move-step direction) state)
+     (read-string distance))))
 
 (defn- part1
   [input]
   (count
-   (get
+   (:visited
     (reduce
      apply-move
      {:knots [[0 0] [0 0]]
-      :visited (set [[0 0]])}
-     (str/split input #"\n"))
-    :visited)))
+      :visited #{[0 0]}}
+     (str/split input #"\n")))))
 
 (defn- part2
   [input]
   (count
-   (get
+   (:visited
     (reduce
      apply-move
      {:knots (repeat 10 [0 0])
       :visited (set [[0 0]])}
-     (str/split input #"\n"))
-    :visited)))
+     (str/split input #"\n")))))
 
 (def day9 [part1 part2])

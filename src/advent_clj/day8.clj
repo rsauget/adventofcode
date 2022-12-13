@@ -44,21 +44,18 @@
 
 (defn- part1
   [input]
-  (let [trees (vec
-               (map
-                (fn [line] (vec (map #(Character/digit % 10) (seq line))))
-                (str/split input #"\n")))]
+  (let [trees (into [] (map
+                        (fn [line] (into [] (map #(Character/digit % 10) line)))
+                        (str/split input #"\n")))]
     (reduce
      +
      (map-indexed
       (fn [y line]
         (count
-         (filter
-          identity
-          (map-indexed
-           (fn [x _tree]
-             (is-visible trees x y))
-           line))))
+         (keep-indexed
+          (fn [x _tree]
+            (when (is-visible trees x y) 1))
+          line)))
       trees))))
 
 (defn- part2

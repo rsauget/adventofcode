@@ -7,8 +7,8 @@
   (let
    [code (int letter)]
     (cond
-      (and (>= code (int \a)) (<= code (int \z))) (+ (- code (int \a)) 1)
-      (and (>= code (int \A)) (<= code (int \Z))) (+ (- code (int \A)) 27))))
+      (<= (int \a) code (int \z)) (+ 1 (- code (int \a)))
+      (<= (int \A) code (int \Z)) (+ 27 (- code (int \A))))))
 
 (defn- get-rucksack-priority
   [line]
@@ -34,16 +34,15 @@
   (let [common-item (first
                      (apply
                       set/intersection
-                      group))]
+                      (map
+                       set group)))]
     (get-item-priority common-item)))
 
 (defn- part2
   [input]
   (let [groups (partition
                 3
-                (map
-                 set
-                 (str/split input #"\n")))]
+                (str/split input #"\n"))]
     (reduce
      +
      (map

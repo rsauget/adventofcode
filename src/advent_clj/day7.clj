@@ -1,50 +1,35 @@
 (ns advent-clj.day7
   (:require [clojure.string :as str]))
 
-(defn- add-file-size
-  [folders cwd file-size]
-  (:folders
-   (reduce
-    (fn
-      [{:keys [cwd folders]} dir]
-      {:cwd (conj cwd dir)
-       :folders (update
-                 folders
-                 (str/join "/" (conj cwd dir))
-                 #(+ file-size (if (nil? %) 0 %)))})
-    {:cwd [] :folders folders}
-    cwd)))
-
 (defn- infer-folders
   [lines]
   (:folders
    (reduce
     (fn
-      [acc line]
-      (let [{:keys [cwd folders]} acc
-            cd (get (re-matches #"^\$ cd (.+)$" line) 1)
+      [{:keys [cwd folders] :as acc} line]
+      (let [cd (second (re-matches #"^\$ cd (.+)$" line))
             [file-size-str file-name] (rest (re-matches #"^(\d+) (.+)$" line))
             file-size (when (some? file-size-str) (read-string file-size-str))
-            dir-name (get (re-matches #"^dir (.+)$" line) 1)]
+            dir-name (second (re-matches #"^dir (.+)$" line))]
         (cond
-          (= cd "..") {:cwd (vec (butlast cwd))
+          (= cd "..") {:cwd (into [] (butlast cwd))
                        :folders folders}
-          (some? cd) {:cwd (conj cwd cd)
+          (some? cd) {:cwd (conj cwd (str/join (last cwd) cd))
                       :folders (update
                                 folders
                                 (str/join "/" (conj cwd cd))
-                                #(if (nil? %) 0 %))}
+                                #(or % 0))}
           (some? dir-name) {:cwd cwd
                             :folders
                             (update
                              folders
                              (str/join "/" (conj cwd dir-name))
-                             #(if (nil? %) 0 %))}
+                             #(or % 0))}
           (some? file-name) {:cwd cwd
-                             :folders (add-file-size
+                             :folders (merge-with
+                                       +
                                        folders
-                                       cwd
-                                       file-size)}
+                                       (into {} (map (fn [dir] [dir file-size]) cwd)))}
           :else acc)))
     {:cwd [] :folders (sorted-map)}
     lines)))
@@ -71,7 +56,7 @@
     (first
      (sort
       (filter
-       (partial <= to-remove-disk-size)
+       #(<= to-remove-disk-size %)
        (map
         second
         folders))))))

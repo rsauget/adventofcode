@@ -26,24 +26,19 @@
   [input]
   (count
    (filter
-    (fn
-      [line]
-      (let
-       [[left right] (str/split line #"")]
-        (or
-         (range-contains left right)
-         (range-contains right left))))
+    (comp
+     #(or
+       (apply range-contains %)
+       (apply range-contains (reverse %)))
+     #(str/split % #","))
+
     (str/split input #"\n"))))
 
 (defn- part2
   [input]
   (count
    (filter
-    (fn
-      [line]
-      (let
-       [[left right] (str/split line #"")]
-        (ranges-overlap left right)))
+    #(apply ranges-overlap (str/split % #","))
     (str/split input #"\n"))))
 
 (def day4 [part1 part2])
