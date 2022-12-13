@@ -25,7 +25,6 @@
      (first (find-value-coordinates \E letter-world))]))
 
 ;; Pathfinding
-
 (defn min-by [f coll]
   (when (seq coll)
     (reduce (fn [min value]
@@ -42,13 +41,6 @@
           (map #(into [] (map + cell %))
                [[-1 0] [1 0] [0 -1] [0 1]])))
 
-(defn estimate-cost [end start]
-  (reduce + (map (comp abs -) end start)))
-
-(defn total-cost [newcost ends start]
-  (+ newcost
-     (apply min (map #(estimate-cost % start) ends))))
-
 (defn path-cost [neighbor]
   (inc (get neighbor :cost -1)))
 
@@ -56,32 +48,31 @@
   (let [height (count world)
         width (count (first world))]
     (loop [steps 0
-           closed-routes (into [] (repeat height (into [] (repeat width nil))))
-           open-routes (sorted-set [0 start])]
-      (let [found-route (first (keep #(get-in closed-routes %) ends))]
-        (if (or found-route (empty? open-routes))
+           visited (into [] (repeat height (into [] (repeat width nil))))
+           todo (sorted-set [0 start])]
+      (let [found-route (first (keep #(get-in visited %) ends))]
+        (if (or found-route (empty? todo))
           found-route
-          (let [[_ cell :as route] (first open-routes)
-                remaining-routes (disj open-routes route)
+          (let [[_ cell :as item] (first todo)
+                rest (disj todo item)
                 candidates (neighbors cell height width)
                 predecessors (filter #(reachable? world % cell) candidates)
-                successors (filter #(reachable? world cell %) candidates)
                 best-candidate (min-by :cost
-                                       (keep #(get-in closed-routes %)
+                                       (keep #(get-in visited %)
                                              predecessors))
                 newcost (path-cost best-candidate)
-                oldcost (:cost (get-in closed-routes cell))]
+                oldcost (:cost (get-in visited cell))]
             (if (and oldcost (>= newcost oldcost))
-              (recur (inc steps) closed-routes remaining-routes)
+              (recur (inc steps) visited rest)
               (recur (inc steps)
-                     (assoc-in closed-routes cell
+                     (assoc-in visited cell
                                {:cost newcost
                                 :steps (conj (:steps best-candidate []) cell)})
-                     (into remaining-routes
+                     (into rest
                            (map
                             (fn [successor]
-                              [(total-cost newcost ends successor) successor])
-                            successors))))))))))
+                              [(inc newcost) successor])
+                            (filter #(reachable? world cell %) candidates)))))))))))
 
 ;; Domain logic
 
