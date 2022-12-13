@@ -44,7 +44,7 @@
 (defn path-cost [neighbor]
   (inc (get neighbor :cost -1)))
 
-(defn astar [world start ends reachable?]
+(defn find-path [world start ends reachable?]
   (let [height (count world)
         width (count (first world))]
     (loop [steps 0
@@ -87,15 +87,17 @@
           (number? to-cell-height)
           (<= to-cell-height (inc from-cell-height))))))
 
+(defn- reachable-back?
+  [world from-cell to-cell]
+  (reachable? world to-cell from-cell))
+
 (defn- part1 [input]
   (let [[world start end] (parse-world input)]
-    (:cost (astar world end [start] (fn [world from-cell to-cell]
-                                      (reachable? world to-cell from-cell))))))
+    (:cost (find-path world end [start] reachable-back?))))
 
 (defn- part2 [input]
   (let [[world _start end] (parse-world input)
         starts (find-value-coordinates 0 world)]
-    (:cost (astar world end starts (fn [world from-cell to-cell]
-                                     (reachable? world to-cell from-cell))))))
+    (:cost (find-path world end starts reachable-back?))))
 
 (def day12 [part1 part2])
