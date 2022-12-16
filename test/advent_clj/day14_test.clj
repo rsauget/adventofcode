@@ -31,4 +31,5 @@
   (testing "Part 2 - real"
     (is (=
          26484
-         (part2 real-input)))))
+         (part2 real-input))))
+  )
