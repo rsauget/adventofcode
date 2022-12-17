@@ -5,6 +5,7 @@
             [advent-clj.day11 :refer [day11]]
             [advent-clj.day12 :refer [day12]]
             [advent-clj.day13 :refer [day13]]
+            [advent-clj.day14 :refer [day14]]
             [advent-clj.day2 :refer [day2]]
             [advent-clj.day3 :refer [day3]]
             [advent-clj.day4 :refer [day4]]
@@ -28,19 +29,13 @@
    day10
    day11
    day12
-   day13])
+   day13
+   day14])
 
 (defn -main
   []
   (doall
    (map-indexed
     (fn [index [& parts]]
-      (let [day-number (inc index)]
-        (println (format "****** Day %02d ******" day-number))
-        (doseq
-         [[number result] (run-day day-number parts)]
-          (println (format "* Part %d:" number))
-          (println result)))
-      (println "********************")
-      (println))
+      (run-day (inc index) parts))
     days)))

@@ -7,10 +7,14 @@
 
 (defn run-day
   [day-number [& parts]]
-  (let
-   [input (slurp-input day-number)]
-    (map-indexed
-     (fn
-       [index part]
-       [(inc index) (part input)])
-     parts)))
+  (println (format "****** Day %02d ******" day-number))
+  (doall (let
+          [input (slurp-input day-number)]
+           (map-indexed
+            (fn
+              [index part]
+              (println (format "* Part %d:" (inc index)))
+              (println (time (part input))))
+            parts)))
+  (println "********************")
+  (println))
