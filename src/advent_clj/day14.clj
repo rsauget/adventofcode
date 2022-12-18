@@ -1,6 +1,5 @@
 (ns advent-clj.day14
-  (:require [clojure.pprint :as pp]
-            [clojure.string :as str]))
+  (:require [clojure.string :as str]))
 
 (defn- rock? [rocks [x y]]
   ((get rocks x #{}) y))
@@ -66,9 +65,9 @@
                               (into path (map #(vector x %) (range y max-reachable-y)))
                               [x max-reachable-y])
        (not (rock? rocks [x (inc y)])) (recur
-                                      rocks
-                                      (conj path [x y])
-                                      [x (inc y)])
+                                        rocks
+                                        (conj path [x y])
+                                        [x (inc y)])
        (not (rock? rocks [(dec x) (inc y)])) (recur
                                               rocks
                                               (conj path [x y])
@@ -140,11 +139,3 @@
      (reduce + (map (comp count second) rocks)))))
 
 (def day14 [part1 part2])
-
-
-;; (def simple-input
-;;   "498,4 -> 498,6 -> 496,6
-;; 503,4 -> 502,4 -> 502,9 -> 494,9")
-
-;; (part1 simple-input)
-;;(part2 simple-input)
