@@ -2,7 +2,7 @@
   (:require [clojure.string :as str]))
 
 (defn- height [world]
-  (apply max (map #(last (second %)) world)))
+  (apply max (map #(first (rseq (second %))) world)))
 
 (defn- print-map [world shape]
   (Thread/sleep 500)
@@ -94,7 +94,7 @@
 (defn- fingerprint [seen-states world shape shape-type shape-index push-type push-index]
   (let [tower-height (height world)
         shape-height (- (apply max (map first shape)) tower-height)
-        world-front (into [] (map #(clamp -10 0 (- (last (second %)) tower-height)) world))
+        world-front (into [] (map #(clamp -10 0 (- (first (rseq (second %))) tower-height)) world))
         fingerprint-key [shape-height shape-type push-type world-front]
         already-seen (seen-states fingerprint-key)]
     (if already-seen
@@ -133,11 +133,10 @@
             (> (quot shape-count (- shape-index (:shape-index already-seen))) 0))
        (let [cycle-length (- shape-index (:shape-index already-seen))
              cycle-count (quot shape-count cycle-length)
-            ;;  skipped-pushes (* cycle-count (- push-index (:push-index already-seen)))
              skipped-shapes (* cycle-count cycle-length)
              skipped-tower-height (* cycle-count (- tower-height (:tower-height already-seen)))]
         ;;  (println "cycle found from" (:shape-index already-seen) "to" shape-index)
-        ;;  (println (format "skipping %d cycles (%d shapes and %d pushes)" cycle-count skipped-shapes skipped-pushes))
+        ;;  (println (format "skipping %d cycles (%d shapes)" cycle-count skipped-shapes))
         ;;  (println "tower height increased by" skipped-tower-height)
          (recur pushes
                 (update-vals world (fn [ys]
