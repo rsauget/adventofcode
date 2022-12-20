@@ -45,11 +45,11 @@
     #(<= % 100000)
     (map
      second
-     (infer-folders (str/split input #"\n"))))))
+     (infer-folders (str/split-lines input))))))
 
 (defn- part2
   [input]
-  (let [folders (infer-folders (str/split input #"\n"))
+  (let [folders (infer-folders (str/split-lines input))
         used-disk-size (get folders "/")
         free-disk-size (- total-disk-size used-disk-size)
         to-remove-disk-size  (- required-disk-size free-disk-size)]

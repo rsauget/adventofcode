@@ -53,7 +53,7 @@
      apply-move
      {:knots [[0 0] [0 0]]
       :visited #{[0 0]}}
-     (str/split input #"\n")))))
+     (str/split-lines input)))))
 
 (defn- part2
   [input]
@@ -63,6 +63,6 @@
      apply-move
      {:knots (repeat 10 [0 0])
       :visited (set [[0 0]])}
-     (str/split input #"\n")))))
+     (str/split-lines input)))))
 
 (def day9 [part1 part2])

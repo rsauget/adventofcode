@@ -48,7 +48,7 @@
    +
    (map
     get-turn-score-part1
-    (str/split input #"\n"))))
+    (str/split-lines input))))
 
 (defn- part2
   [input]
@@ -56,6 +56,6 @@
    +
    (map
     get-turn-score-part2
-    (str/split input #"\n"))))
+    (str/split-lines input))))
 
 (def day2 [part1 part2])

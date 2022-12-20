@@ -12,7 +12,7 @@
        {:sensor sensor
         :beacon beacon
         :distance (distance sensor beacon)}))
-   (str/split input #"\n")))
+   (str/split-lines input)))
 
 (defn- get-blocked-xs [target {:keys [sensor beacon]}]
   (let [radius (distance sensor beacon)

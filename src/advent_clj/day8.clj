@@ -46,7 +46,7 @@
   [input]
   (let [trees (into [] (map
                         (fn [line] (into [] (map #(Character/digit % 10) line)))
-                        (str/split input #"\n")))]
+                        (str/split-lines input)))]
     (reduce
      +
      (map-indexed
@@ -63,7 +63,7 @@
   (let [trees (vec
                (map
                 (fn [line] (vec (map #(Character/digit % 10) (seq line))))
-                (str/split input #"\n")))]
+                (str/split-lines input)))]
     (apply
      max
      (map-indexed

@@ -58,14 +58,14 @@
   (let [valves (reduce
                 parse-valve
                 {}
-                (str/split input #"\n"))]
+                (str/split-lines input))]
     (apply max (vals (run-simulation valves "AA" 30)))))
 
 (defn- part2 [input]
   (let [valves (reduce
                 parse-valve
                 {}
-                (str/split input #"\n"))
+                (str/split-lines input))
         paths (run-simulation valves "AA" 26)]
     (apply max (for [[my-visited my-pressure] paths
                      [elephant-visited elephant-pressure] paths

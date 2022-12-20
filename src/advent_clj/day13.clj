@@ -22,7 +22,7 @@
   (reduce +
           (map-indexed
            (fn [index packet]
-             (let [[left right] (map read-string (str/split packet #"\n"))]
+             (let [[left right] (map read-string (str/split-lines packet))]
                (if (packets-sorted? left right)
                  (inc index)
                  0)))
@@ -42,6 +42,6 @@
      #(if (packets-sorted? %1 %2) -1 1)
      (into dividers (map
                      read-string
-                     (filter seq (str/split input #"\n"))))))))
+                     (filter seq (str/split-lines input))))))))
 
 (def day13 [part1 part2])

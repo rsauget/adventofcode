@@ -32,13 +32,13 @@
        (apply range-contains (reverse %)))
      #(str/split % #","))
 
-    (str/split input #"\n"))))
+    (str/split-lines input))))
 
 (defn- part2
   [input]
   (count
    (filter
     #(apply ranges-overlap (str/split % #","))
-    (str/split input #"\n"))))
+    (str/split-lines input))))
 
 (def day4 [part1 part2])

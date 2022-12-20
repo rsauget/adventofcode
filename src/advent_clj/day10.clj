@@ -27,7 +27,7 @@
       (nth
        (iterate
         run-cycle
-        {:stack (str/split input #"\n")
+        {:stack (str/split-lines input)
          :cycle-function (fn [cycle-counter x]
                            (if (some #{cycle-counter} signal-strength-cycles)
                              (* cycle-counter x)
@@ -52,7 +52,7 @@
          (nth
           (iterate
            run-cycle
-           {:stack (str/split input #"\n")
+           {:stack (str/split-lines input)
             :cycle-function (fn [cycle-counter x]
                               (if (<= (dec x)
                                       (mod (dec cycle-counter) width)

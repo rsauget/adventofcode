@@ -44,7 +44,7 @@
 
 (defn- part1
   [input]
-  (let [[stacks moves] (parse-input (str/split input #"\n"))]
+  (let [[stacks moves] (parse-input (str/split-lines input))]
     (str/join
      ""
      (map
@@ -57,7 +57,7 @@
 
 (defn- part2
   [input]
-  (let [[stacks moves] (parse-input (str/split input #"\n"))]
+  (let [[stacks moves] (parse-input (str/split-lines input))]
     (str/join
      ""
      (map

@@ -12,7 +12,7 @@
                  world)))
 
 (defn- parse-world [input]
-  (let [letter-world (map #(vec %) (str/split input #"\n"))]
+  (let [letter-world (map #(vec %) (str/split-lines input))]
     [(into [] (map (fn [row]
                      (into [] (map #(- (int (case %
                                               \S \a

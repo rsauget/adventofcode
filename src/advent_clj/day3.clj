@@ -27,7 +27,7 @@
    +
    (map
     get-rucksack-priority
-    (str/split input #"\n"))))
+    (str/split-lines input))))
 
 (defn- get-group-priority
   [group]
@@ -42,7 +42,7 @@
   [input]
   (let [groups (partition
                 3
-                (str/split input #"\n"))]
+                (str/split-lines input))]
     (reduce
      +
      (map

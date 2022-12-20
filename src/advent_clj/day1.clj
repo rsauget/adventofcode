@@ -6,7 +6,7 @@
   (let
    [calories (map
               read-string
-              (str/split elf #"\n"))]
+              (str/split-lines elf))]
     (reduce + calories)))
 
 (defn- get-elves-calories [input]

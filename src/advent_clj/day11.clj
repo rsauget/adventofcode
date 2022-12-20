@@ -26,7 +26,7 @@
 
 (defn- parse-monkey
   [definition]
-  (let [lines (str/split definition #"\n")
+  (let [lines (str/split-lines definition)
         [monkey-id starting-items operation test if-true if-false] lines]
     (merge
      {:id (re-find #"\d+" monkey-id)

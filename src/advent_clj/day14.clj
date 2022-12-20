@@ -47,7 +47,7 @@
   (reduce
    add-rock-path
    (sorted-map)
-   (map parse-rock-path (str/split input #"\n"))))
+   (map parse-rock-path (str/split-lines input))))
 
 (def sand-start [500 0])
 
