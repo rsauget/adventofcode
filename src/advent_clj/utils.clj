@@ -18,3 +18,12 @@
             parts)))
   (println "********************")
   (println))
+
+;; (defn gcd [a b]
+;;   (if (zero? b) a
+;;       (recur b (mod a b))))
+
+;; (defn lcm [a b]
+;;   (cond (zero? a) 0
+;;         (zero? b) 0
+;;         :else (abs (* b (quot a (gcd a b))))))
