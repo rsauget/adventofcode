@@ -4,25 +4,25 @@
 (defn- rock? [rocks [x y]]
   ((get rocks x #{}) y))
 
-(defn- print-map [rocks floor-y path sand]
-  (let [min-x (first (first rocks))
-        max-x (first (last rocks))
-        min-y 0
-        max-y (or floor-y (apply max (map #(apply max (second %)) rocks)))]
-    ;; (Thread/sleep 100)
-    (print (str (char 27) "[2J"))
-    (print (str (char 27) "[;H"))
-    (println (str/join "\n"
-                       (for [x (reverse (range min-x (inc max-x)))]
-                         (str/join ""
-                                   (for [y (range min-y (inc max-y))]
-                                     (cond
-                                       (= sand [x y]) "O"
-                                       (rock? rocks [x y]) "#"
-                                       (= floor-y y) "#"
-                                       :else "."))))))
-    (println sand)
-    (println (apply str (repeat (inc (- max-x min-x)) "=")))))
+;; (defn- print-map [rocks floor-y path sand]
+;;   (let [min-x (first (first rocks))
+;;         max-x (first (last rocks))
+;;         min-y 0
+;;         max-y (or floor-y (apply max (map #(apply max (second %)) rocks)))]
+;;     ;; (Thread/sleep 100)
+;;     (print (str (char 27) "[2J"))
+;;     (print (str (char 27) "[;H"))
+;;     (println (str/join "\n"
+;;                        (for [x (reverse (range min-x (inc max-x)))]
+;;                          (str/join ""
+;;                                    (for [y (range min-y (inc max-y))]
+;;                                      (cond
+;;                                        (= sand [x y]) "O"
+;;                                        (rock? rocks [x y]) "#"
+;;                                        (= floor-y y) "#"
+;;                                        :else "."))))))
+;;     (println sand)
+;;     (println (apply str (repeat (inc (- max-x min-x)) "=")))))
 
 (defn- add-rock [rocks [x y]]
   (update rocks x #(conj (or % (sorted-set)) y)))

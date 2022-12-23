@@ -1,31 +1,30 @@
 (ns advent-clj.day17
-  (:require [advent-clj.utils :refer [enumerate]]
-            [clojure.string :as str]))
+  (:require [advent-clj.utils :refer [enumerate]]))
 
 (defn- height [world]
   (apply max (map #(first (rseq (second %))) world)))
 
-(defn- print-map [world shape]
-  (Thread/sleep 500)
-  (let [min-x -1
-        max-x 7
-        max-y (+ 5 (height world))
-        min-y (max 0 (- max-y 40))]
-    (print (str (char 27) "[2J"))
-    (print (str (char 27) "[;H"))
-    (println (str/join "\n"
-                       (for [y (reverse (range min-y (inc max-y)))]
-                         (str/join ""
-                                   (for [x (range min-x (inc max-x))]
-                                     (cond
-                                       (= [0 -1] [y x]) "+"
-                                       (= [0 7] [y x]) "+"
-                                       (= 0 y) "-"
-                                       (= -1 x) "|"
-                                       (= 7 x) "|"
-                                       ((get world x) y) "#"
-                                       (shape [y x]) "@"
-                                       :else "."))))))))
+;; (defn- print-map [world shape]
+;;   (Thread/sleep 500)
+;;   (let [min-x -1
+;;         max-x 7
+;;         max-y (+ 5 (height world))
+;;         min-y (max 0 (- max-y 40))]
+;;     (print (str (char 27) "[2J"))
+;;     (print (str (char 27) "[;H"))
+;;     (println (str/join "\n"
+;;                        (for [y (reverse (range min-y (inc max-y)))]
+;;                          (str/join ""
+;;                                    (for [x (range min-x (inc max-x))]
+;;                                      (cond
+;;                                        (= [0 -1] [y x]) "+"
+;;                                        (= [0 7] [y x]) "+"
+;;                                        (= 0 y) "-"
+;;                                        (= -1 x) "|"
+;;                                        (= 7 x) "|"
+;;                                        ((get world x) y) "#"
+;;                                        (shape [y x]) "@"
+;;                                        :else "."))))))))
 
 (defn- clamp [min max x]
   (cond (< x min) min

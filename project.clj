@@ -6,5 +6,6 @@
   :dependencies [[org.clojure/clojure "1.11.1"]]
   :main ^:skip-aot advent-clj.core
   :target-path "target/%s"
+  :plugins [[com.github.clj-kondo/lein-clj-kondo "0.2.1"]]
   :profiles {:uberjar {:aot :all
                        :jvm-opts ["-Dclojure.compiler.direct-linking=true"]}})

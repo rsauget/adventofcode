@@ -1,6 +1,5 @@
 (ns advent-clj.day18
-  (:require [clojure.pprint :as pprint]
-            [clojure.string :as str]))
+  (:require [clojure.string :as str]))
 
 (defn- neighbors [[xmin xmax ymin ymax zmin zmax] cell]
   (filter (fn [[x y z]]

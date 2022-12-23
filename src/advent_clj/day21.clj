@@ -1,6 +1,5 @@
 (ns advent-clj.day21
-  (:require [clojure.string :as str]
-            [clojure.pprint :as pprint]))
+  (:require [clojure.string :as str]))
 
 (defn- find-index [value coll]
   (first (keep-indexed #(when (= value %2) %1) coll)))

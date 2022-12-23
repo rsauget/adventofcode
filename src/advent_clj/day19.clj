@@ -1,6 +1,5 @@
 (ns advent-clj.day19
-  (:require [clojure.pprint :as pprint]
-            [clojure.string :as str]))
+  (:require [clojure.string :as str]))
 
 (def blueprint-matcher #"Blueprint (\d+): Each ore robot costs (\d+) ore. Each clay robot costs (\d+) ore. Each obsidian robot costs (\d+) ore and (\d+) clay. Each geode robot costs (\d+) ore and (\d+) obsidian.")
 

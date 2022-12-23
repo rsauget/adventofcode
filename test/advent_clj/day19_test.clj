@@ -42,5 +42,5 @@ Blueprint 2:
 
   (testing "Part 2 - real"
     (is (=
-         2066
+         15510
          (part2 real-input)))))
