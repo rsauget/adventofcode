@@ -18,8 +18,8 @@
           :obsidian (+ obsidian (* obsidian-robots duration))
           :geodes (+ geodes (* geode-robots duration)))))
 
-(defn- ore-robot-builder [ore-robot-cost-ore]
-  (fn [{:keys [minutes ore-robots ore] :as state}]
+(defn- ore-robot-builder [^long ore-robot-cost-ore]
+  (fn [{:keys [minutes ^long ore-robots ^long ore] :as state}]
     (cond (>= ore ore-robot-cost-ore)
           (update (harvest (update state
                                    :ore - ore-robot-cost-ore))
@@ -30,8 +30,8 @@
 
           :else nil)))
 
-(defn- clay-robot-builder [clay-robot-cost-ore]
-  (fn [{:keys [minutes ore-robots ore] :as state}]
+(defn- clay-robot-builder [^long clay-robot-cost-ore]
+  (fn [{:keys [minutes ^long ore-robots ^long ore] :as state}]
     (cond (>= ore clay-robot-cost-ore)
           (update (harvest (update state
                                    :ore - clay-robot-cost-ore))
@@ -42,8 +42,8 @@
 
           :else nil)))
 
-(defn- obisidian-robot-builder [obsidian-robot-cost-ore obsidian-robot-cost-clay]
-  (fn [{:keys [minutes clay-robots clay ore-robots ore] :as state}]
+(defn- obisidian-robot-builder [^long obsidian-robot-cost-ore ^long obsidian-robot-cost-clay]
+  (fn [{:keys [minutes ^long clay-robots ^long clay ^long ore-robots ^long ore] :as state}]
     (cond (and (>= ore obsidian-robot-cost-ore)
                (>= clay obsidian-robot-cost-clay))
           (update (harvest (update (update state
@@ -58,8 +58,8 @@
 
           :else nil)))
 
-(defn- geode-robot-builder [geode-robot-cost-ore geode-robot-cost-obsidian]
-  (fn [{:keys [minutes obsidian-robots obsidian ore-robots ore] :as state}]
+(defn- geode-robot-builder [^long geode-robot-cost-ore ^long geode-robot-cost-obsidian]
+  (fn [{:keys [minutes ^long obsidian-robots ^long obsidian ^long ore-robots ^long ore] :as state}]
     (cond (and (>= ore geode-robot-cost-ore)
                (>= obsidian geode-robot-cost-obsidian))
           (update (harvest (update (update state

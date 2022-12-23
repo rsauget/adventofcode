@@ -98,7 +98,7 @@
                     [(:id monkey) (dissoc monkey :id)])
                   (map parse-monkey definitions)))]
     (monkey-business
-     (run-rounds 20 monkeys #(Math/floorDiv % 3)))))
+     (run-rounds 20 monkeys #(Math/floorDiv (long %) 3)))))
 
 (defn- part2
   [input]
