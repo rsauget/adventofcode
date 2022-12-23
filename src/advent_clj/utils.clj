@@ -27,3 +27,6 @@
 ;;   (cond (zero? a) 0
 ;;         (zero? b) 0
 ;;         :else (abs (* b (quot a (gcd a b))))))
+
+(defn enumerate [coll]
+  (map-indexed (fn [index item] [index item]) coll))

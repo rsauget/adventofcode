@@ -43,5 +43,4 @@ Blueprint 2:
   (testing "Part 2 - real"
     (is (=
          2066
-         (part2 real-input))))
-  )
+         (part2 real-input)))))

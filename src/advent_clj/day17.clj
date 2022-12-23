@@ -1,5 +1,6 @@
 (ns advent-clj.day17
-  (:require [clojure.string :as str]))
+  (:require [advent-clj.utils :refer [enumerate]]
+            [clojure.string :as str]))
 
 (defn- height [world]
   (apply max (map #(first (rseq (second %))) world)))
@@ -25,9 +26,6 @@
                                        ((get world x) y) "#"
                                        (shape [y x]) "@"
                                        :else "."))))))))
-
-(defn- enumerate [coll]
-  (map-indexed (fn [index item] [index item]) coll))
 
 (defn- clamp [min max x]
   (cond (< x min) min

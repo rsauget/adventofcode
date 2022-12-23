@@ -12,6 +12,7 @@
             [advent-clj.day18 :refer [day18]]
             [advent-clj.day19 :refer [day19]]
             [advent-clj.day2 :refer [day2]]
+            [advent-clj.day20 :refer [day20]]
             [advent-clj.day3 :refer [day3]]
             [advent-clj.day4 :refer [day4]]
             [advent-clj.day5 :refer [day5]]
@@ -40,7 +41,8 @@
    day16
    day17
    day18
-   day19])
+   day19
+   day20])
 
 (defn -main
   []
