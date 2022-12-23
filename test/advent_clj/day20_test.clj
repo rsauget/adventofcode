@@ -35,5 +35,5 @@
 
   (testing "Part 2 - real"
     (is (=
-         2066
+         548634267428
          (part2 real-input)))))
