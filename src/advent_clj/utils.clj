@@ -2,14 +2,14 @@
   (:require [clojure.java.io :as io]))
 
 (defn slurp-input
-  [day-number]
-  (slurp (.getFile (io/resource (format "day%s/input.txt" day-number)))))
+  [year day-number]
+  (slurp (.getFile (io/resource (format "%s/day%s/input.txt" year day-number)))))
 
 (defn run-day
-  [day-number [& parts]]
+  [year day-number [& parts]]
   (println (format "****** Day %02d ******" day-number))
   (doall (let
-          [input (slurp-input day-number)]
+          [input (slurp-input year day-number)]
            (map-indexed
             (fn
               [index part]
