@@ -1,9 +1,11 @@
 (ns advent-clj.core
   (:gen-class)
   (:require [advent-clj.utils :refer [run-day]]
-            [advent-clj.2022.core :as year-2022]))
+            [advent-clj.2022.core :as year-2022]
+            [advent-clj.2023.core :as year-2023]))
 
-(def days {2022 year-2022/days})
+(def days {2022 year-2022/days
+           2023 year-2023/days})
 
 (defn -main
   [& args]

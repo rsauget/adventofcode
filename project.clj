@@ -7,7 +7,8 @@
   :main ^:skip-aot advent-clj.core
   :target-path "target/%s"
   :plugins [[com.github.clj-kondo/lein-clj-kondo "0.2.1"]]
-  :profiles {:uberjar {:aot :all
+  :profiles {:dev {:plugins [[com.jakemccrary/lein-test-refresh "0.25.0"]]}
+             :uberjar {:aot :all
                        :jvm-opts ["-Dclojure.compiler.direct-linking=true"]}}
   :test-selectors {:default :year-2023
                    :year-2023 :year-2023
