@@ -1,6 +1,5 @@
 (ns advent-clj.2023.day3
-  (:require [clojure.string :as str]
-            [clojure.pprint :as pprint]))
+  (:require [clojure.string :as str]))
 
 (defn- parse-engine-schematic
   [input]
